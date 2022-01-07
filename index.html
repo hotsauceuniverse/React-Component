@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  <script type="text/babel">
+    console.log(React);
+    console.log(ReactDOM);
+
+    // React Component 만들기
+
+    // // Class Component 정의
+    // class ClassComponent extends React.Component {
+    //   render() {
+    //     return <div>Hello</div>;
+    //   }
+    // }
+
+    // // 사용
+    // ReactDOM.render(
+    //   <ClassComponent />,
+    //   document.querySelector('#root')
+    // );
+
+
+    // // Function Component 정의 1
+    // function FunctionComponent() {
+    //   return <div>Hello</div>;
+    // }
+
+    // // Function Component 정의 2
+    // const FunctionComponent = () => <div>Hello</div>;
+    
+    // // 사용
+    // ReactDOM.render(<FunctionComponent />, document.querySelector('#root'))
+
+// -----------------------------------------------------------------------------
+    // React.createElement로 컴포넌트 만들기
+
+    // React.createElement(
+    //   type, // 태그 이름 문자열 | 리액트 컴포넌트 | React.Fragment
+    //   [props], // 리액트 컴포넌트에 넣어주는 데이터 객체
+    //   [...children] // 자식으로 넣어주는 요소들
+    // )
+
+    // // 1. 태그 이름 문자열 type
+    // <h1>type이 "태그 이름 문자열" 입니다.</h1>
+    // ReactDOM.render(
+    //   React.createElement('h1', null, `type이 "태그 이름 문자열" 입니다.`),
+    //   document.querySelector('#root')
+    // );
+
+
+    // // 2. 리액트 컴포넌트 type
+    // const Component = () => {
+    //   return React.createElement('p', null, `type이 "React 컴포넌트" 입니다.`);
+    // };
+
+    // // <Component></Component> => <p>type이 "React 컴포넌트" 입니다.</p>
+    // ReactDOM.render(
+    //   React.createElement(Component, null, null), 
+    //   document.querySelector('#root')
+    // );
+
+
+    // // 3. React.Fragment
+    // ReactDOM.render(
+    //   React.createElement(React.Fragment, null, `type이 "React Fragment" 입니다.`),
+    //   document.querySelector('#root')
+    // );
+
+
+    // // 4. 복잡한 리액트 엘리먼트 모임
+    // EX> 
+    // <div>
+    //   <div>
+    //     <h1>주제</h1>
+    //     <ul>
+    //       <li>React</li>
+    //       <li>Vue</li>
+    //     </ul>
+    //   </div>
+    // </div>
+
+    // ReactDOM.render(
+    //   React.createElement(
+    //     'div', 
+    //     null, 
+    //     React.createElement(
+    //       'div',
+    //        null, 
+    //        React.createElement('h1', null, '주제'), 
+    //        React.createElement(
+    //          'ul', 
+    //          null, 
+    //          React.createElement('li', null, 'React'),
+    //          React.createElement('li', null, 'Vue')
+    //        )
+    //     )
+    //   ),
+    //   document.querySelector('#root')
+    // );
+// -----------------------------------------------------------------------------
+    // JSX : JSX문법으로 작성된 코드는 순수한 JS로 컴파일 하여 사용한다. => babel
+
+    // 우리가 작성한 어떤 코드 => 순수하게 실행 할 수 있는 자바스크립트
+
+    // ReactDOM.render(
+    // <div>
+    //   <div>
+    //     <h1>주제</h1>
+    //     <ul>
+    //       <li>React</li>
+    //       <li>Vue</li>
+    //     </ul>
+    //   </div>
+    // </div>,
+    //   document.querySelector('#root')
+    // );
+
+    // JSX 문법
+    // 최상위 요소가 하나여야 합니다.
+    // 최상위 요소 리턴하는 경우, ( ) 로 감싸야 합니다.  
+    // 자식들을 바로 랜더링하고 싶으면, <>자식들</> 를 사용합니다. => Fragment
+    // 자바스크립트 표현식을 사용하려면, {표현식} 를 이용합니다.
+    // if 문은 사용할 수 없습니다.
+    // 삼항 연산자 혹은 && 를 사용합니다.
+    // style 을 이용해 인라인 스타일링이 가능합니다.
+    // class 대신 className 을 사용해 class 를 적용할 수 있습니다.
+    // 자식요소가 있으면, 꼭 닫아야 하고, 자식요소가 없으면 열면서 닫아야 합니다.
+
+// -----------------------------------------------------------------------------
+    // Props / State
+    // Props 는 컴포넌트 외부에서 컴포넌트에게 주는 데이터입니다.
+    // State 는 컴포넌트 내부에서 변경할 수 있는 데이터입니다.
+    // 둘 다 변경이 발생하면, 랜더가 다시 일어날 수 있습니다.
+
+
+    // {message: '안녕하세요'}
+    // function Component(props) {
+    //   return (
+    //   <div>
+    //     <h1>{props.message} 이것은 함수로 만든 컴포넌트 입니다.</h1>
+    //   </div>
+    //   );
+    // }
+
+    // Component.defaultProps = {
+    //   message: "기본값1",
+    // };
+
+    // class Component extends React.Component{
+    //   // 방법 1
+    //   // state = {
+    //   //   count: 0,
+    //   // }; // 항상 객체형태!
+
+    //   // 방법 2
+    //   constructor(props) {
+    //     super(props);
+
+    //     // 초기화
+    //     this.state = {count: 0}
+    //   }
+
+    //   render() {
+    //     return (
+    //       <div>
+    //         <h1>{this.props.message} 이것은 클래스로 만든 컴포넌트 입니다.</h1>
+    //         <p>{this.state.count}</p>  
+    //       </div>
+    //     );
+    //   }
+
+    //   componentDidMount() {
+    //     setTimeout(() => {
+    //       // this.state.count = this.state.count + 1; // -> state가 변경되지 않는다.
+    //       this.setState({ // state 변경 함수 -> this.setState
+    //         count: this.state.count + 1,
+    //       });
+    //     }, 1000);
+    //   }
+
+    //   static defaultProps = {
+    //     message: "기본값2",
+    //   };
+    // }
+
+    // ReactDOM.render(
+    //   <Component message="기본값 아님"/>, 
+    //   document.querySelector('#root')
+    // );
+// -----------------------------------------------------------------------------
+    // Event Handling
+    // function Component() {
+    //   return (
+    //     <div>
+    //       <button onClick={() => {
+    //         console.log("clicked");}}>
+    //         클릭
+    //       </button>
+    //     </div>
+    //   );
+    // }
+
+    // class Component extends React.Component {
+    //   state = {
+    //     count: 0,
+    //   };
+
+    //   render() {
+    //     return (
+    //       <div>
+    //         <p>{this.state.count}</p>
+    //         <button onClick={() => {
+    //           console.log("clicked");
+    //           this.setState(state => ({...state, count: state.count + 1,
+    //          }));
+    //         }}>
+    //           클릭
+    //         </button>
+    //       </div>
+    //     );
+    //   }
+    // }
+
+    // ReactDOM.render(
+    //   <Component />, 
+    //   document.querySelector('#root')
+    // );
+// -----------------------------------------------------------------------------
+    // Component Lifcycle (16.3 이전버전)
+    // Component 생성 및 마운트
+    // constructor -> componentWillMount -> rendere(최초랜더) -> componentDidMount
+    class App extends React.Component {
+      state = {
+        age: 28,
+      };
+      interval = null;
+      constructor(props) {
+        super(props);
+
+        console.log('constructor', props);
+      };
+
+      render() {
+        console.log('render');
+        return (
+          <div>
+            <h2>
+              hello {this.props.name} - {this.state.age}
+            </h2>
+          </div>
+        );
+      }
+      componentWillMount() {
+        console.log('componentWillMount');
+      }
+
+      componentDidMount() {
+        console.log('componentDidMount');
+
+        this.interval = setInterval(() => {
+          // console.log('setInterval')
+          this.setState(state => ({...state, age: state.age + 1}));
+        },1000);
+      }
+
+      // Component porps, state 변경
+      // componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> reder -> componentDidUpdate
+      componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProp', nextProps);
+      } // props를 새로 지정했을 때 바로 호출되며 state의 변경에 반응하지 않는다.
+
+      shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate', nextProps, nextState);
+
+        return true; // 랜더의 결정 유무 (default = true)
+      } // props만 변경되어도 / state만 변경되어도 / 둘다 변경되어도 newProps와 newState를 인자로 해서 호출한다.
+
+      componentWillUpdate(nextProps, nextState) {
+        console.log('componentWillUpdate', nextProps, nextState);
+      }; // 컴포넌트가 재 랜더링 되기직전에 불리며 setState같은 것을 쓰면 안된다.
+    
+      componentDidUpdate(prevProps, prevState) {
+        console.log('componentDidUpdate', prevProps, prevState);
+      }; // 컴포넌트가 재 랜더링을 마치면 불린다.
+
+      componentWillUnmount() {
+        clearInterval(this.interval);
+      };
+    }
+
+    ReactDOM.render(<App name="Seyoung" />, document.querySelector('#root'));
+
+// -----------------------------------------------------------------------------
+    // Component Lifcycle (16.3 이후버전)
+
+    // constructor
+    // componentWillMount => getDerivedStateFromProps
+    // render
+    // componentDidMount
+    // componentWillReceiveProps => getDerivedStateFromProps
+    // shouldComponentUpdate
+    // render
+    // componentWillUpdate => getSnapshotBeforeUpdate
+    // (dom에 적용)
+    // componentDidUpdate
+    // componentWillUnmount
+
+    // component 에러캐치 => componentDidCatch
+
+  </script>
+</body>
+</html>
